@@ -1,0 +1,444 @@
+{
+ "actions": [],
+ "creation": "2026-11-01 12:00:00.000000",
+ "modified": "2026-11-01 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator",
+ "doctype": "DocType",
+ "name": "ZID Settings",
+ "module": "ZID Integration",
+ "engine": "InnoDB",
+ "custom": 0,
+ "field_order": [
+  "connection_section",
+  "enabled",
+  "client_id",
+  "client_secret",
+  "redirect_uri",
+  "column_break_conn",
+  "authorization_token",
+  "manager_token",
+  "refresh_token",
+  "token_expires_on",
+  "token_updated_on",
+  "advanced_section",
+  "api_base_url",
+  "oauth_base_url",
+  "column_break_adv",
+  "page_size",
+  "request_delay_ms",
+  "sync_section",
+  "sync_interval_minutes",
+  "date_range_mode",
+  "days_back",
+  "from_date",
+  "to_date",
+  "column_break_sync",
+  "skip_cancelled_orders",
+  "only_paid_orders",
+  "last_sync_on",
+  "last_sync_status",
+  "invoice_section",
+  "company",
+  "invoice_action",
+  "naming_series",
+  "default_customer",
+  "match_by_zid_customer_id",
+  "match_by_mobile",
+  "match_by_email",
+  "column_break_inv",
+  "cost_center",
+  "update_stock",
+  "warehouse",
+  "pos_profile",
+  "fallback_item",
+  "tax_section",
+  "taxes_and_charges",
+  "prices_include_vat",
+  "coupon_apply_on",
+  "column_break_tax",
+  "shipping_item",
+  "shipping_includes_vat",
+  "total_tolerance",
+  "on_total_mismatch",
+  "payment_section",
+  "default_mode_of_payment",
+  "unpaid_orders",
+  "payment_method_mapping"
+ ],
+ "fields": [
+  {
+   "fieldname": "connection_section",
+   "fieldtype": "Section Break",
+   "label": "Connection"
+  },
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enable Scheduled Sync",
+   "default": "0"
+  },
+  {
+   "fieldname": "client_id",
+   "fieldtype": "Data",
+   "label": "Client ID",
+   "description": "From your ZID Partner app"
+  },
+  {
+   "fieldname": "client_secret",
+   "fieldtype": "Password",
+   "label": "Client Secret"
+  },
+  {
+   "fieldname": "redirect_uri",
+   "fieldtype": "Data",
+   "label": "Redirect URI",
+   "description": "Leave blank to use https://&lt;your-site&gt;/api/method/zid_integration.oauth.callback. Must match the Redirect URL in the ZID app."
+  },
+  {
+   "fieldname": "column_break_conn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "authorization_token",
+   "fieldtype": "Password",
+   "label": "Authorization Token",
+   "length": 4000,
+   "description": "Sent as 'Authorization: Bearer ...' (token response field 'authorization')"
+  },
+  {
+   "fieldname": "manager_token",
+   "fieldtype": "Password",
+   "label": "Manager Token",
+   "length": 4000,
+   "description": "Sent as 'X-Manager-Token' (token response field 'access_token')"
+  },
+  {
+   "fieldname": "refresh_token",
+   "fieldtype": "Password",
+   "label": "Refresh Token",
+   "length": 4000
+  },
+  {
+   "fieldname": "token_expires_on",
+   "fieldtype": "Datetime",
+   "label": "Token Expires On",
+   "description": "Token is refreshed automatically 30 days before expiry"
+  },
+  {
+   "fieldname": "token_updated_on",
+   "fieldtype": "Datetime",
+   "label": "Token Updated On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "advanced_section",
+   "fieldtype": "Section Break",
+   "label": "API Endpoints",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "api_base_url",
+   "fieldtype": "Data",
+   "label": "API Base URL",
+   "default": "https://api.zid.sa/v1"
+  },
+  {
+   "fieldname": "oauth_base_url",
+   "fieldtype": "Data",
+   "label": "OAuth Base URL",
+   "default": "https://oauth.zid.sa"
+  },
+  {
+   "fieldname": "column_break_adv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "page_size",
+   "fieldtype": "Int",
+   "label": "Orders per Page",
+   "default": "50"
+  },
+  {
+   "fieldname": "request_delay_ms",
+   "fieldtype": "Int",
+   "label": "Delay Between Requests (ms)",
+   "default": "1000"
+  },
+  {
+   "fieldname": "sync_section",
+   "fieldtype": "Section Break",
+   "label": "Order Sync"
+  },
+  {
+   "fieldname": "sync_interval_minutes",
+   "fieldtype": "Int",
+   "label": "Sync Interval (Minutes)",
+   "default": "60"
+  },
+  {
+   "fieldname": "date_range_mode",
+   "fieldtype": "Select",
+   "label": "Date Range",
+   "options": "Rolling Days\nFixed Dates",
+   "default": "Rolling Days"
+  },
+  {
+   "fieldname": "days_back",
+   "fieldtype": "Int",
+   "label": "Days Back",
+   "default": "1",
+   "depends_on": "eval:doc.date_range_mode==\"Rolling Days\"",
+   "description": "1 = yesterday and today (same as Pact)"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "depends_on": "eval:doc.date_range_mode==\"Fixed Dates\"",
+   "mandatory_depends_on": "eval:doc.date_range_mode==\"Fixed Dates\""
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "depends_on": "eval:doc.date_range_mode==\"Fixed Dates\"",
+   "mandatory_depends_on": "eval:doc.date_range_mode==\"Fixed Dates\""
+  },
+  {
+   "fieldname": "column_break_sync",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "skip_cancelled_orders",
+   "fieldtype": "Check",
+   "label": "Skip Cancelled / Reversed Orders",
+   "default": "1"
+  },
+  {
+   "fieldname": "only_paid_orders",
+   "fieldtype": "Check",
+   "label": "Import Only Paid Orders",
+   "default": "0"
+  },
+  {
+   "fieldname": "last_sync_on",
+   "fieldtype": "Datetime",
+   "label": "Last Sync On",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "last_sync_status",
+   "fieldtype": "Small Text",
+   "label": "Last Sync Status",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "invoice_section",
+   "fieldtype": "Section Break",
+   "label": "Sales Invoice"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoice_action",
+   "fieldtype": "Select",
+   "label": "On Import",
+   "options": "Draft\nSubmit",
+   "default": "Draft",
+   "reqd": 1,
+   "description": "Draft = review before submitting. Submit = post immediately."
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Data",
+   "label": "Naming Series",
+   "description": "Optional, e.g. ZID-.YY.-.MM.-.##### (add it to Sales Invoice naming series first)"
+  },
+  {
+   "fieldname": "default_customer",
+   "fieldtype": "Link",
+   "label": "Default Customer",
+   "options": "Customer",
+   "reqd": 1,
+   "description": "Used when the ZID customer is not found in Customer master"
+  },
+  {
+   "fieldname": "match_by_zid_customer_id",
+   "fieldtype": "Check",
+   "label": "Match Customer by ZID Customer ID",
+   "default": "1"
+  },
+  {
+   "fieldname": "match_by_mobile",
+   "fieldtype": "Check",
+   "label": "Match Customer by Mobile",
+   "default": "1"
+  },
+  {
+   "fieldname": "match_by_email",
+   "fieldtype": "Check",
+   "label": "Match Customer by Email",
+   "default": "1"
+  },
+  {
+   "fieldname": "column_break_inv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "update_stock",
+   "fieldtype": "Check",
+   "label": "Update Stock",
+   "default": "1"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "options": "Warehouse",
+   "depends_on": "update_stock",
+   "mandatory_depends_on": "update_stock"
+  },
+  {
+   "fieldname": "pos_profile",
+   "fieldtype": "Link",
+   "label": "POS Profile",
+   "options": "POS Profile",
+   "description": "Optional. Used only for defaults; no POS Opening Entry is needed."
+  },
+  {
+   "fieldname": "fallback_item",
+   "fieldtype": "Link",
+   "label": "Fallback Item for Unknown SKU",
+   "options": "Item",
+   "description": "Leave blank to fail orders with unknown SKUs (recommended)"
+  },
+  {
+   "fieldname": "tax_section",
+   "fieldtype": "Section Break",
+   "label": "Tax, Shipping & Discount"
+  },
+  {
+   "fieldname": "taxes_and_charges",
+   "fieldtype": "Link",
+   "label": "Sales Taxes and Charges Template",
+   "options": "Sales Taxes and Charges Template",
+   "reqd": 1
+  },
+  {
+   "fieldname": "prices_include_vat",
+   "fieldtype": "Check",
+   "label": "ZID Prices Include VAT",
+   "default": "1",
+   "description": "Pact posted ZID prices as VAT inclusive"
+  },
+  {
+   "fieldname": "coupon_apply_on",
+   "fieldtype": "Select",
+   "label": "Apply Coupon Discount On",
+   "options": "Net Total\nGrand Total",
+   "default": "Net Total",
+   "description": "ZID coupon is deducted before VAT (Net Total)"
+  },
+  {
+   "fieldname": "column_break_tax",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "shipping_item",
+   "fieldtype": "Link",
+   "label": "Shipping Item",
+   "options": "Item",
+   "description": "Non-stock service item; its income account replaces Pact account 5150"
+  },
+  {
+   "fieldname": "shipping_includes_vat",
+   "fieldtype": "Check",
+   "label": "ZID Shipping Includes VAT",
+   "default": "1"
+  },
+  {
+   "fieldname": "total_tolerance",
+   "fieldtype": "Currency",
+   "label": "Total Difference Tolerance",
+   "default": "0.05"
+  },
+  {
+   "fieldname": "on_total_mismatch",
+   "fieldtype": "Select",
+   "label": "If Totals Don't Match ZID",
+   "options": "Fail\nSave as Draft",
+   "default": "Fail"
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "POS Payment"
+  },
+  {
+   "fieldname": "default_mode_of_payment",
+   "fieldtype": "Link",
+   "label": "Default Mode of Payment",
+   "options": "Mode of Payment",
+   "reqd": 1,
+   "description": "Used when the ZID payment method has no mapping (Pact default 97)"
+  },
+  {
+   "fieldname": "unpaid_orders",
+   "fieldtype": "Select",
+   "label": "Unpaid Orders (e.g. COD)",
+   "options": "Record POS Payment\nLeave Outstanding",
+   "default": "Record POS Payment"
+  },
+  {
+   "fieldname": "payment_method_mapping",
+   "fieldtype": "Table",
+   "label": "Payment Method Mapping",
+   "options": "ZID Payment Method Mapping"
+  }
+ ],
+ "links": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "index_web_pages_for_search": 0,
+ "issingle": 1,
+ "track_changes": 1,
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "report": 0,
+   "export": 0
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "report": 0,
+   "export": 0
+  }
+ ]
+}

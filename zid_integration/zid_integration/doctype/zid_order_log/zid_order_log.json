@@ -1,0 +1,190 @@
+{
+ "actions": [],
+ "creation": "2026-11-01 12:00:00.000000",
+ "modified": "2026-11-01 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator",
+ "doctype": "DocType",
+ "name": "ZID Order Log",
+ "module": "ZID Integration",
+ "engine": "InnoDB",
+ "custom": 0,
+ "field_order": [
+  "zid_order_id",
+  "status",
+  "sales_invoice",
+  "attempts",
+  "last_attempt_on",
+  "column_break_1",
+  "order_date",
+  "zid_invoice_number",
+  "customer_name",
+  "order_total",
+  "order_status",
+  "payment_status",
+  "payment_method",
+  "section_message",
+  "message",
+  "section_raw",
+  "raw_order"
+ ],
+ "fields": [
+  {
+   "fieldname": "zid_order_id",
+   "fieldtype": "Data",
+   "label": "ZID Order ID",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 0,
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nImported\nSkipped\nFailed",
+   "default": "Pending",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "Sales Invoice",
+   "options": "Sales Invoice",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "attempts",
+   "fieldtype": "Int",
+   "label": "Attempts",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_attempt_on",
+   "fieldtype": "Datetime",
+   "label": "Last Attempt On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "order_date",
+   "fieldtype": "Date",
+   "label": "Order Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "zid_invoice_number",
+   "fieldtype": "Data",
+   "label": "ZID Invoice Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "order_total",
+   "fieldtype": "Currency",
+   "label": "Order Total",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "order_status",
+   "fieldtype": "Data",
+   "label": "Order Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Data",
+   "label": "Payment Status",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Data",
+   "label": "Payment Method",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_message",
+   "fieldtype": "Section Break",
+   "label": "Message"
+  },
+  {
+   "fieldname": "message",
+   "fieldtype": "Long Text",
+   "label": "Message",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_raw",
+   "fieldtype": "Section Break",
+   "label": "ZID Order JSON",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "raw_order",
+   "fieldtype": "Code",
+   "label": "Raw Order",
+   "options": "JSON",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "index_web_pages_for_search": 0,
+ "autoname": "field:zid_order_id",
+ "naming_rule": "By fieldname",
+ "title_field": "zid_order_id",
+ "show_title_field_in_link": 0,
+ "search_fields": "customer_name,zid_invoice_number,sales_invoice",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "report": 1,
+   "export": 1,
+   "delete": 1
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "report": 1,
+   "export": 1,
+   "delete": 1
+  },
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1
+  }
+ ]
+}
